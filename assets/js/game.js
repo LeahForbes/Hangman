@@ -1,35 +1,34 @@
 
 'use strict';
 
-var masterWordList = // Soccer Team Name List
+var masterWordList = // Word list
     [
-        "EVERTON",
-        "LIVERPOOL",
-        "SWANSEA",
-        "CHELSEA",
-        "HULL",
-        "MANCHESTER UNITED",
-        "NEWCASTLE UNITED",
-        "ARSENAL",
-        "TOTTENHAM",
-        "FULLHAM",
-        "STOKE CITY",
-        "LEICESTER CITY",
-        "SOUTHAMPTON",
-        "SUNDERLAND",
+      "EVERTON",
+      "LIVERPOOL",
+      "SWANSEA",
+      "CHELSEA",
+      "HULL",
+      "MANCHESTER UNITED",
+      "NEWCASTLE UNITED",
+      "ARSENAL",
+      "TOTTENHAM",
+      "FULLHAM",
+      "STOKE CITY",
+      "LEICESTER CITY",
+      "SOUTHAMPTON",
+      "SUNDERLAND",
     ];
 
 const totalMaxTries = 10; // Maximum number of tries player has
 const space = "space";
-var  idx =-1;
 // Updates the image depending on how many guesses
 
-// Hangman Preimer League game rules
+// Hangman game object
 var hangmanGame = {
     wordList: masterWordList,       //  Holds the word list, this can be any array of strings
-    guessingWord: [],                   //  Holds the characters guessed right
-    guessedLetters: [],             //  Holds the unique letters guessed
-    currentWord: "",                //  Holds the current word from the wordList
+    guessingWord: [],                   //  Holds the characters we've guessed right
+    guessedLetters: [],             //  Holds the unique letters we've guessed
+    currentWord: "",                //  Holds the current word we're guessing from the wordList
     lastWordIdx: -1,                //  Holds the last word index, so we don't pick the same word twice in a row
     wins: 0,                        //  Total wins
     maxTries: totalMaxTries,        //  Max tries, front const above
@@ -40,13 +39,15 @@ var hangmanGame = {
     loseSound: new Audio('./assets/sounds/you-lose.wav'),           //  Holds the most loser of all sounds
     wrongKey: new Audio('./assets/sounds/wrong-key.mp3'),
 
+
+
     // resetGame() function
     // resets all of our game variables.  Should be ran first.
     resetGame: function () {
-         idx = -1;
+        var idx = -1;
         do  {
             idx = Math.floor(Math.random() * this.wordList.length);
-        } while(idx === this.lastWordIdx);
+        } while(idx === this.lastWordIdx)
 
         this.currentWord = this.wordList[idx];
         this.lastWordIdx = idx;
@@ -173,32 +174,19 @@ var hangmanGame = {
 
 // Hint
 
-  var getHint = document.getElementById("hint");
-  var showClue = document.getElementById("clue");
-
-  getHint.onclick = function() { alert ("Test");
-  hintword =
-    ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club", "Has won 13 League titles", "Also refer to as Spurs", "Oldest football team from London", "Second-oldest football clud in the world","Won the 2015-16 Premier League", "Nicknamed The Saints", "Won the FA Cup twice"];
-var hintword = hint[idx];
-var hintIndex = masterWordList.indexOf(masterWordList);
-showClue.innerHTML = "Clue: - " +  hintword;
-};
+//   getHint.onclick = function() { alert ("Test");
+//   hintword =
+//     ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club", "Has won 13 League titles", "Also refer to as Spurs", "Oldest football team from London", "Second-oldest football clud in the world","Won the 2015-16 Premier League", "Nicknamed The Saints", "Won the FA Cup twice"];
+// var hintword = hint[idx];
+// var hintIndex = masterWordList.indexOf(masterWordList);
+// showClue.innerHTML = "Clue: - " +  hintword;
+// };
 
 // isLetter(keyCode)
 // Check if the keyCode falls between A-Z
 function isLetter(keyCode) {
     return (keyCode >= 65 && keyCode <= 90);
 }
-
-//Reset
-document.getElementById('reset').onclick = function() {
-correct.parentNode.removeChild(correct);
-letters.parentNode.removeChild(letters);
-showClue.innerHTML = "";
-context.clearRect(0, 0, 400, 400);
-play();
- };
-
 
 // Keyboard event handler
 document.onkeydown = function (event) {
