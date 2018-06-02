@@ -22,7 +22,7 @@ var masterWordList = // Word list
 const totalMaxTries = 10; // Maximum number of tries player has
 const space = "space";
 // Updates the image depending on how many guesses
-
+var idx = -1;
 // Hangman game object
 var hangmanGame = {
     wordList: masterWordList,       //  Holds the word list, this can be any array of strings
@@ -44,7 +44,7 @@ var hangmanGame = {
     // resetGame() function
     // resets all of our game variables.  Should be ran first.
     resetGame: function () {
-        var idx = -1;
+        idx = -1;
         do  {
             idx = Math.floor(Math.random() * this.wordList.length);
         } while(idx === this.lastWordIdx)
@@ -190,6 +190,7 @@ function isLetter(keyCode) {
 
 // Keyboard event handler
 document.onkeydown = function (event) {
+  
     // If we finished a game, dump one keystroke and reset.
     if (hangmanGame.hasFinished) {
         hangmanGame.resetGame();
@@ -203,3 +204,15 @@ document.onkeydown = function (event) {
         }
     }
 };
+
+
+//hint button
+
+document.getElementById("hint").onclick = function(){
+  var hintword =
+    ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club", "Has won 13 League titles", "Also refer to as Spurs", "Oldest football team from London", "Second-oldest football clud in the world","Won the 2015-16 Premier League", "Nicknamed The Saints", "Won the FA Cup twice"];
+ var newhint = hintword[idx];
+// var hintIndex = masterWordList.indexOf(masterWordList);
+document.getElementById("clue").innerHTML = "Clue: - " +  newhint;
+    
+}
